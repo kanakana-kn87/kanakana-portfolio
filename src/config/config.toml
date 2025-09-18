@@ -1,0 +1,7 @@
+[app]
+  title = "かなかなのポートフォリオ"
+  description = "Next.jsとReactで作られた、かなかなのポートフォリオサイトです。"
+  author = "かなかな"
+    [app.meta]
+      encode = "UTF-8"
+      language = "ja"

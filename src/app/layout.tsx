@@ -2,6 +2,12 @@ import type { Metadata } from "next";
 import { Zen_Kurenaido } from "next/font/google";
 import "@/scss/globals.scss";
 import config from "@/server/configLoader";
+import { Suspense } from 'react';
+// src/app/page.tsx (サーバーコンポーネントの例)
+import { serverLogger } from '@/server/lib/logger';
+import SpinnerComponent from '@/components/Spinner';
+
+
 
 const zenKurenaido = Zen_Kurenaido({
   weight: ["400"],
@@ -15,18 +21,18 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default async function RootLayout({children,}: Readonly<{children: React.ReactNode;}>) {
+  serverLogger.info('ホームページがサーバーでレンダリングされました。');
   return (
     <html lang={config.app.meta.language as string}>
       <body
         className={zenKurenaido.className}
-        suppressHydrationWarning={false}
+        suppressHydrationWarning={true}
       >
-        {children}
+
+        <Suspense fallback={<SpinnerComponent />}>
+          {children}
+        </Suspense>
       </body>
     </html>
   );

@@ -9,10 +9,11 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@lottiefiles/react-lottie-player": "^3.6.0",
+    "dayjs": "^1.11.18",
     "next": "15.5.3",
     "react": "19.1.0",
     "react-dom": "19.1.0",
-    "react-loader-spinner": "^6.1.6",
     "sass": "^1.92.1",
     "toml": "^3.0.0"
   },

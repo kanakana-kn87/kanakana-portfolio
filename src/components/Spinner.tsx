@@ -10,7 +10,7 @@ export default function MyLottiePlayer() {
       loop
       src="/Lottie/loading.json" // ⭐ publicディレクトリのファイルを指定！
       style={{ height: '300px', width: '300px' }}
-      speed={20}
+      speed={5}
     />
   );
 }

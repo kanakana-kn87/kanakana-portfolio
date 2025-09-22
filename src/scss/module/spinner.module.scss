@@ -1,6 +1,26 @@
+/* src/scss/module/spinner.module.scss */
+$spinner-size: 50px;
+
+@mixin square($size: 100px) {
+  width: $size;
+  height: $size;
+}
+
+.spinner_wrapper {
+  @apply flex justify-center items-center;
+  @include square(100vh);
+}
+
 .spinner {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-left-color: #ffffff;
+  border-radius: 50%;
+  @include square($spinner-size);
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
 }

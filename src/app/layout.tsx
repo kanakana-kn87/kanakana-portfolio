@@ -11,6 +11,7 @@ import SpinnerComponent from '@/components/Spinner';
 
 const zenKurenaido = Zen_Kurenaido({
   weight: ["400"],
+  subsets: ['latin'],
 });
 
 export const metadata: Metadata = {

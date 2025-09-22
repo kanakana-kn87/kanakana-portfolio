@@ -1,16 +1,14 @@
-"use client";
+// src/components/Spinner.tsx
 
-import { Player } from '@lottiefiles/react-lottie-player';
 import React from 'react';
+import styles from '../scss/module/spinner.module.scss';
 
-export default function MyLottiePlayer() {
+const SpinnerComponent: React.FC = () => {
   return (
-    <Player
-      autoplay
-      loop
-      src="/Lottie/loading.json" // ⭐ publicディレクトリのファイルを指定！
-      style={{ height: '300px', width: '300px' }}
-      speed={5}
-    />
-  );
+    <div className={styles.spinner_wrapper}>
+      <div className={styles.spinner}></div>
+    </div>
+  )
 }
+
+export default SpinnerComponent

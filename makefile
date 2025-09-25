@@ -1,13 +1,23 @@
-.PHONY: all build install stop nextbuild
-all: run
+# Next.js の世界へレッツゴー！
 
-run:
-	@kubectl apply -f deployment.yaml
+# .PHONY: は必須だよ！
+.PHONY: all build prod stop
+all: dev
+# 開発環境を起動する
+dev:
+	@echo "🛠️ 開発サーバーを起動するよ！ホットリロードが効くはずだよ！"
+	@docker-compose up
 
-	@kubectl apply -f service.yaml
+# (必要なら) イメージだけビルド
 build:
-	@docker build -t kanakana-portfolio .
-nextbuild:
-	@docker run kanakana-portfolio npm run build
+	@docker-compose build
+
+# 本番環境用にイメージをビルドする（Dockerfileのマルチステージビルドが前提だよ！）
+prod:
+	@echo "🚀 本番用イメージをビルドするよ！"
+	@docker build -t kanakana-portfolio:latest .
+	
+# コンテナを停止・削除する
 stop:
-	@kubectl scale deployment kanakana-portfolio-deployment --replicas=0
+	@echo "🛑 コンテナを停止するよ！"
+	@docker-compose down

@@ -9,7 +9,7 @@ const delay = (ms: number) => {
 };
 
 export default async function Home() {
-  await delay(10000);
+  await delay(1000);
   return (
     // ⭐ Suspenseをpage.tsxで使う！
     <Suspense fallback={<SpinnerComponent />}>

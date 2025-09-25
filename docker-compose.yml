@@ -1,0 +1,14 @@
+# docker-compose の世界へレッツゴー！
+services:
+  app:
+    build: .
+    ports:
+      # Next.jsのデフォルトポート
+      - "3000:3000"
+    volumes:
+      # ローカルのコードをコンテナの作業ディレクトリにマウント
+      - .:/app
+      # node_modules はコンテナ内にあるものを使う（マウントから除外）
+      - /app/node_modules
+    # 開発サーバーを起動！
+    command: npm run dev

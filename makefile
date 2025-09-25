@@ -1,9 +1,13 @@
-.PHONY: all build install
+.PHONY: all build install stop nextbuild
 all: run
 
 run:
-	@npm run dev
+	@kubectl apply -f deployment.yaml
+
+	@kubectl apply -f service.yaml
 build:
-	@npm run build
-install:
-	npm install
+	@docker build -t kanakana-portfolio .
+nextbuild:
+	@docker run kanakana-portfolio npm run build
+stop:
+	@kubectl scale deployment kanakana-portfolio-deployment --replicas=0

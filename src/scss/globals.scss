@@ -1,8 +1,13 @@
+/* src/app/globals.css */
+
+/* 1. 🚨 Tailwindのベースとコンポーネントを最初に適用 */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-html {
-  @apply bg-[#003a41] text-[rgb(236,255,255)];
-  scroll-behavior: smooth;
+/* 3. 🏆 最終的なルール：ZenKurenaidoの強制適用 */
+/* これが最後に適用されるので、他のすべてのフォントルールを上書きします。 */
+.radix-themes, .radix-themes *, .radix-themes *:before, .radix-themes *:after {
+  /* layout.tsx で設定した CSS変数名（--font-zen など）を使う */
+  font-family: var(--font-zen), sans-serif !important; 
 }

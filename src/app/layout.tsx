@@ -2,16 +2,17 @@ import type { Metadata } from "next";
 import { Zen_Kurenaido } from "next/font/google";
 import "@/scss/globals.scss";
 import config from "@/server/configLoader";
-import { Suspense } from 'react';
+import { Suspense } from "react";
 // src/app/page.tsx (サーバーコンポーネントの例)
-import { serverLogger } from '@/server/lib/logger';
-import SpinnerComponent from '@/components/Spinner';
-
-
+import { serverLogger } from "@/server/lib/logger";
+import SpinnerComponent from "@/components/Spinner";
+import Providers from "./providers"; 
+import "@radix-ui/themes/styles.css";
 
 const zenKurenaido = Zen_Kurenaido({
   weight: ["400"],
-  subsets: ['latin'],
+  subsets: ["latin"],
+  variable: '--font-zen',
 });
 
 export const metadata: Metadata = {
@@ -22,18 +23,17 @@ export const metadata: Metadata = {
   },
 };
 
-export default async function RootLayout({children,}: Readonly<{children: React.ReactNode;}>) {
-  serverLogger.info('ホームページがサーバーでレンダリングされました。');
+export default async function RootLayout({
+  children,
+}: Readonly<{ children: React.ReactNode }>) {
+  serverLogger.info("ホームページがサーバーでレンダリングされました。");
   return (
     <html lang={config.app.meta.language as string}>
-      <body
-        className={zenKurenaido.className}
-        suppressHydrationWarning={true}
-      >
-
-        <Suspense fallback={<SpinnerComponent />}>
-          {children}
-        </Suspense>
+      <body className={zenKurenaido.className} suppressHydrationWarning={true}>
+        {/* ⭐️ Providers（クライアント）で囲む！ */}
+        <Providers> 
+          <Suspense fallback={<SpinnerComponent />}>{children}</Suspense>
+        </Providers>
       </body>
     </html>
   );

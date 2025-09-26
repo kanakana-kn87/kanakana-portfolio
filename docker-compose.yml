@@ -1,14 +1,24 @@
 # docker-compose の世界へレッツゴー！
 services:
   app:
+    
     build: .
     ports:
-      # Next.jsのデフォルトポート
       - "3000:3000"
     volumes:
-      # ローカルのコードをコンテナの作業ディレクトリにマウント
-      - .:/app
-      # node_modules はコンテナ内にあるものを使う（マウントから除外）
+      # ローカルのコードをコンテナに同期！これは必須だよ！
+      - .:/app 
       - /app/node_modules
+      - app-cache:/app/.next/cache
+      
+    # ⭐️ 魔法の環境変数を追加！これがポーリングを有効にするよ！
+    environment:
+      # Next.js のポーリング（ファイル監視）を強制的に有効にするよ！
+      - CHOKIDAR_USEPOLLING=true
+      # または、Next.js の watchpack のポーリングを有効にするよ！
+      - WATCHPACK_POLLING=true
+      
     # 開発サーバーを起動！
     command: npm run dev
+volumes:
+  app-cache:

@@ -1,4 +1,6 @@
 /* src/scss/module/spinner.module.scss */
+
+// ⭐️ サイズはそのまま
 $spinner-size: 50px;
 
 @mixin square($size: 100px) {
@@ -12,8 +14,14 @@ $spinner-size: 50px;
 }
 
 .spinner {
-  border: 4px solid rgba(0, 0, 0, 0.1);
-  border-left-color: #ffffff;
+  // 🚨 修正！背景を固定の色ではなく、Radix Themesの灰色変数を使う
+  //    --gray-4: ライトモードでは明るい灰色、ダークモードでは暗い灰色
+  border: 4px solid var(--gray-4); 
+  
+  // 🚨 修正！動いている色を固定の白(#ffffff)ではなく、Radix Themesの強調色変数を使う
+  //    --accent-9: テーマの強調色（irisなど）の中で、コントラストの高い色
+  border-left-color: var(--accent-9); 
+  
   border-radius: 50%;
   @include square($spinner-size);
   animation: spin 1s linear infinite;
